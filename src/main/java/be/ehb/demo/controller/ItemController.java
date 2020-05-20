@@ -4,10 +4,7 @@ import be.ehb.demo.dao.ItemDAO;
 import be.ehb.demo.entity.GroceryList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +31,17 @@ public class ItemController {
     public List<GroceryList> getItemsByCategory(@PathVariable(value = "category") String category) {
         return dao.findAllByCategory(category);
     }
-    
+
+    @RequestMapping(value = "items/new", method = RequestMethod.POST)
+    @ResponseBody
+    public void createItem(@RequestParam(value = "name") String name,
+                           @RequestParam(value = "unitPrice") double unitPrice,
+                           @RequestParam(value = "amount") int amount,
+                           @RequestParam(value = "category") String category) {
+
+        GroceryList groceryList = new GroceryList(name, unitPrice, amount, category);
+        dao.save(groceryList);
+    }
+
 
 }

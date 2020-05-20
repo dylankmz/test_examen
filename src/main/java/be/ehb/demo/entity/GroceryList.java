@@ -18,6 +18,13 @@ public class GroceryList {
     public GroceryList() {
     }
 
+    public GroceryList(String name, double unitPrice, int amount, String category) {
+        this.name = name;
+        this.unitPrice = unitPrice;
+        this.amount = amount;
+        this.category = category;
+    }
+
     public int getId() {
         return id;
     }
